@@ -58,6 +58,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/blueprint/logging"
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/ir"
@@ -189,26 +190,36 @@ func (b *CmdBuilder) Build() error {
 	// Define the wiring spec
 	slog.Info(fmt.Sprintf("Building %v-%v to %v", b.Name, b.SpecName, b.OutputDir))
 	b.Wiring = wiring.NewWiringSpec(b.Name)
+	startWiring := time.Now()
 	nodesToBuild, err := b.Spec.Build(b.Wiring)
+	durWiring := time.Since(startWiring)
 	if err != nil {
 		return fmt.Errorf("unable to build %v-%v wiring due to %v", b.Name, b.SpecName, err.Error())
 	}
 	slog.Info(fmt.Sprintf("Constructed %v WiringSpec %v: \n%v", b.Name, b.SpecName, b.Wiring))
 
 	// Construct the IR
+	startIR := time.Now()
 	b.IR, err = b.Wiring.BuildIR(nodesToBuild...)
+	durIR := time.Since(startIR)
 	slog.Info(fmt.Sprintf("%v %v IR: \n%v", b.Name, b.SpecName, b.IR))
 	if err != nil {
 		return fmt.Errorf("unable to construct %v-%v IR due to %v", b.Name, b.SpecName, err.Error())
 	}
+	fmt.Printf("Constructed %v-%v IR: \n", b.Name, b.SpecName)
 
 	// Generate artifacts
+	startArtifacts := time.Now()
 	slog.Info(fmt.Sprintf("Generating %v-%v artifacts to %v", b.Name, b.SpecName, b.OutputDir))
 	err = b.IR.GenerateArtifacts(b.OutputDir)
+	durArtifacts := time.Since(startArtifacts)
 	if err != nil {
 		return fmt.Errorf("unable to generate %v-%v artifacts due to %v", b.Name, b.SpecName, err.Error())
 	}
 
-	slog.Info(fmt.Sprintf("Successfully generated %v-%v to %v", b.Name, b.SpecName, b.OutputDir))
+	fmt.Printf("Successfully generated %v-%v to %v\n", b.Name, b.SpecName, b.OutputDir)
+	fmt.Printf("Time used to define wiring spec: %v\n", durWiring)
+	fmt.Printf("Time used to construct IR: %v\n", durIR)
+	fmt.Printf("Time used to generate artifacts: %v\n", durArtifacts)
 	return nil
 }
