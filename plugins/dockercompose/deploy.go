@@ -66,11 +66,14 @@ func (node *Deployment) generateArtifacts(workspace *dockerComposeWorkspace) err
 	fmt.Printf("Image nodes: %v\n", len(imageNodes))
 	startTime := time.Now()
 	for i, node := range imageNodes {
+		// go func(node docker.ProvidesContainerImage) {
 		startTime2 := time.Now()
 		if err := node.AddContainerArtifacts(workspace); err != nil {
+			// slog.Error(fmt.Sprintf("unable to add container artifacts due to %v", err.Error()))
 			return err
 		}
 		fmt.Printf("Image node: #%v, time: %v\n", i, time.Since(startTime2))
+		// }(node)
 	}
 	fmt.Printf("Image nodes: %v, time: %v\n", len(imageNodes), time.Since(startTime))
 
