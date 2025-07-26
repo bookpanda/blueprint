@@ -8,8 +8,7 @@
 package main
 
 import (
-	_ "github.com/blueprint-uservices/blueprint/examples/sockshop/tests"
-	"github.com/blueprint-uservices/blueprint/examples/sockshop/wiring/specs"
+	"github.com/blueprint-uservices/blueprint/examples/testapp/wiring/specs"
 	"github.com/blueprint-uservices/blueprint/plugins/cmdbuilder"
 	"github.com/blueprint-uservices/blueprint/plugins/workflow/workflowspec"
 )
@@ -17,15 +16,14 @@ import (
 func main() {
 	// Make sure tests and workflow can be found
 	workflowspec.AddModule("github.com/blueprint-uservices/blueprint/examples/sockshop/tests")
-	workflowspec.AddModule("github.com/blueprint-uservices/blueprint/examples/sockshop/workflow")
 
 	// Build a supported wiring spec
-	name := "SockShop"
+	name := "testapp"
 	cmdbuilder.MakeAndExecute(
 		name,
 		specs.Basic,
-		specs.GRPC,
-		specs.Docker,
-		specs.DockerRabbit,
+		// specs.GRPC,
+		// specs.Docker,
+		// specs.DockerRabbit,
 	)
 }

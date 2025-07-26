@@ -1,6 +1,4 @@
-go 1.22.0
-
-toolchain go1.22.1
+go 1.22.1
 
 use (
 	./blueprint
@@ -17,6 +15,7 @@ use (
 	./examples/sockshop/wiring
 	./examples/sockshop/workflow
 	./examples/sockshop/workload
+	./examples/testapp/wiring
 	./examples/train_ticket/tests
 	./examples/train_ticket/wiring
 	./examples/train_ticket/workflow
