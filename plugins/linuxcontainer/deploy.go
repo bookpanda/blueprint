@@ -3,6 +3,7 @@ package linuxcontainer
 import (
 	"fmt"
 	"path/filepath"
+	"time"
 
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/blueprint/ioutil"
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/ir"
@@ -83,6 +84,7 @@ can typecheck the workspace to utilize those platform-specific commands.
 */
 func (node *Container) generateArtifacts(workspace linux.ProcessWorkspace) error {
 	// Add all processes artifacts to the workspace
+	startTime := time.Now()
 	for _, child := range node.Nodes {
 		if n, valid := child.(linux.ProvidesProcessArtifacts); valid {
 			if err := n.AddProcessArtifacts(workspace); err != nil {
@@ -90,6 +92,7 @@ func (node *Container) generateArtifacts(workspace linux.ProcessWorkspace) error
 			}
 		}
 	}
+	fmt.Printf("Time process artifacts: %v\n", time.Since(startTime))
 
 	// Collect the scripts to run the processes
 	for _, child := range node.Nodes {
