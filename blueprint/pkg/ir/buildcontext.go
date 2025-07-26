@@ -1,5 +1,7 @@
 package ir
 
+import "sync"
+
 type (
 	// A Blueprint application can potentially have multiple IR node instances spread across the application
 	// that generate the same code.
@@ -23,9 +25,13 @@ type (
 // Basic implementation of the [VisitTracker] interface
 type VisitTrackerImpl struct {
 	visited map[string]any
+	mu      sync.Mutex
 }
 
 func (tracker *VisitTrackerImpl) Visited(name string) bool {
+	tracker.mu.Lock()
+	defer tracker.mu.Unlock()
+
 	if tracker.visited == nil {
 		tracker.visited = make(map[string]any)
 	}
