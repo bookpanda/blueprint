@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"time"
 
 	"golang.org/x/exp/slog"
 
@@ -115,13 +116,15 @@ type (
 	}
 )
 
+var cumulativeTime time.Duration
+
 // Parses the module directory specified by srcDir and returns a ParsedModule.
 // All of the packages inside the module will be parsed.
 // srcDir must contain a go.mod file; if it doesn't an error will be returned.
 func parseModule(srcDir string) (*ParsedModule, error) {
+	startTime := time.Now()
 	srcDir = filepath.Clean(srcDir)
 
-	fmt.Printf("Parsing module %s\n", srcDir)
 	modfilePath := filepath.Join(srcDir, "go.mod")
 	modfileData, err := os.ReadFile(modfilePath)
 	if err != nil {
@@ -160,6 +163,8 @@ func parseModule(srcDir string) (*ParsedModule, error) {
 		}
 	}
 	slog.Info(fmt.Sprintf("Parsed %s version=%s local=%v", mod.Name, mod.Version, mod.IsLocal))
+	cumulativeTime += time.Since(startTime)
+	fmt.Printf("Parsing module %s took %v, cumulative time %v\n", srcDir, time.Since(startTime), cumulativeTime)
 
 	return mod, nil
 }
