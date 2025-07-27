@@ -3,7 +3,6 @@ package goproc
 import (
 	"fmt"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/ir"
@@ -70,23 +69,26 @@ func (node *Process) GenerateArtifacts(workspaceDir string) error {
 
 	// Generate constructors and function declarations
 	startTime := time.Now()
-	wg := sync.WaitGroup{}
+	// wg := sync.WaitGroup{}
 	for _, node := range node.Nodes {
 		if n, valid := node.(golang.GeneratesFuncs); valid {
-			wg.Add(1)
-			go func() error {
-				defer wg.Done()
-				startTime2 := time.Now()
-				if err := n.GenerateFuncs(module); err != nil {
-					slog.Error(fmt.Sprintf("unable to generate funcs for %v due to %v", err.Error()))
-					return err
-				}
-				fmt.Printf("go: Time funcs: %v\n", time.Since(startTime2))
-				return nil
-			}()
+			if err := n.GenerateFuncs(module); err != nil {
+				return err
+			}
+			// wg.Add(1)
+			// go func() error {
+			// 	defer wg.Done()
+			// 	startTime2 := time.Now()
+			// 	if err := n.GenerateFuncs(module); err != nil {
+			// 		slog.Error(fmt.Sprintf("unable to generate funcs for %v due to %v", err.Error()))
+			// 		return err
+			// 	}
+			// 	fmt.Printf("go: Time funcs: %v\n", time.Since(startTime2))
+			// 	return nil
+			// }()
 		}
 	}
-	wg.Wait()
+	// wg.Wait()
 	fmt.Printf("Time funcs: %v\n", time.Since(startTime))
 
 	// Create the method to instantiate the namespace
