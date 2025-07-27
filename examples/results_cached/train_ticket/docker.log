@@ -1,0 +1,7 @@
+2025/07/27 15:34:01 INFO ignore_irconfig registered as the default namespace builder for ir.IRConfig nodes
+2025/07/27 15:34:01 INFO ignore_irmetadata registered as the default namespace builder for ir.IRMetadata nodes
+[15:34:01.905] [plugins/golang/goparser/parser.go:165] INFO: Parsed github.com/blueprint-uservices/blueprint/examples/train_ticket/tests version= local=true
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/train_ticket/tests took 9.6745ms, cumulative time 9.674333ms
+[15:34:01.907] [plugins/cmdbuilder/cmdbuilder.go:163] INFO: Suppressing compiler logging
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/train_ticket/workflow took 39.925584ms, cumulative time 49.599792ms
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/runtime took 35.182625ms, cumulative time 84.782292ms
