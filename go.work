@@ -16,6 +16,7 @@ use (
 	./examples/sockshop/workflow
 	./examples/sockshop/workload
 	./examples/testapp/wiring
+	./examples/testapp/workflow
 	./examples/train_ticket/tests
 	./examples/train_ticket/wiring
 	./examples/train_ticket/workflow

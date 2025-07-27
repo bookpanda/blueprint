@@ -23,7 +23,7 @@ func main() {
 		name,
 		specs.Basic,
 		// specs.GRPC,
-		// specs.Docker,
+		specs.Docker,
 		// specs.DockerRabbit,
 	)
 }
