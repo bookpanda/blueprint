@@ -1,0 +1,9 @@
+2025/07/27 15:41:48 INFO ignore_irconfig registered as the default namespace builder for ir.IRConfig nodes
+2025/07/27 15:41:48 INFO ignore_irmetadata registered as the default namespace builder for ir.IRMetadata nodes
+[15:41:48.247] [plugins/cmdbuilder/cmdbuilder.go:163] INFO: Suppressing compiler logging
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/runtime took 14.4095ms, cumulative time 14.409416ms
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/leaf/workflow took 1.695084ms, cumulative time 16.104416ms
+Parsing module build/linux/nonleaf_proc/nonleaf_proc took 29.224292ms, cumulative time 45.328708ms
+Parsing module build/linux/nonleaf_proc/runtime took 18.460625ms, cumulative time 63.789292ms
+Parsing module build/linux/nonleaf_proc/workflow took 873.875µs, cumulative time 64.663167ms
+exit status 2

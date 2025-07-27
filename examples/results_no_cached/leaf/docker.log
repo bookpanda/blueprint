@@ -1,0 +1,14 @@
+2025/07/27 15:41:42 INFO ignore_irconfig registered as the default namespace builder for ir.IRConfig nodes
+2025/07/27 15:41:42 INFO ignore_irmetadata registered as the default namespace builder for ir.IRMetadata nodes
+[15:41:42.923] [plugins/cmdbuilder/cmdbuilder.go:163] INFO: Suppressing compiler logging
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/runtime took 13.575916ms, cumulative time 13.575875ms
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/leaf/workflow took 930µs, cumulative time 14.505834ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/nonleaf_proc took 25.291583ms, cumulative time 39.797417ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/runtime took 13.648959ms, cumulative time 53.446292ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/workflow took 580.584µs, cumulative time 54.026834ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/nonleaf_proc took 31.815834ms, cumulative time 85.842626ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/runtime took 13.548375ms, cumulative time 99.390959ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/workflow took 480.25µs, cumulative time 99.871167ms
+Parsing module build/docker/leaf_ctr/leaf_proc/leaf_proc took 68.058417ms, cumulative time 167.929417ms
+Parsing module build/docker/leaf_ctr/leaf_proc/runtime took 34.927458ms, cumulative time 202.856792ms
+Parsing module build/docker/leaf_ctr/leaf_proc/workflow took 1.039375ms, cumulative time 203.896083ms

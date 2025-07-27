@@ -1,0 +1,11 @@
+2025/07/27 15:41:37 INFO ignore_irconfig registered as the default namespace builder for ir.IRConfig nodes
+2025/07/27 15:41:37 INFO ignore_irmetadata registered as the default namespace builder for ir.IRMetadata nodes
+[15:41:37.924] [plugins/golang/goparser/parser.go:165] INFO: Parsed github.com/blueprint-uservices/blueprint/examples/dsb_sn/tests version= local=true
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/dsb_sn/tests took 5.114666ms, cumulative time 5.114625ms
+[15:41:37.925] [plugins/cmdbuilder/cmdbuilder.go:163] INFO: Suppressing compiler logging
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/runtime took 23.277042ms, cumulative time 28.391542ms
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/dsb_sn/workflow took 6.103667ms, cumulative time 34.495125ms
+Parsing module build/docker/wrk2api_container/wrk2api_proc/runtime took 11.7865ms, cumulative time 46.281541ms
+Parsing module build/docker/wrk2api_container/wrk2api_proc/workflow took 3.844375ms, cumulative time 50.125875ms
+Parsing module build/docker/wrk2api_container/wrk2api_proc/wrk2api_proc took 30.521417ms, cumulative time 80.647292ms
+exit status 2
