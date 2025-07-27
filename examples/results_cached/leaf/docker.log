@@ -1,11 +1,11 @@
-2025/07/27 15:31:26 INFO ignore_irconfig registered as the default namespace builder for ir.IRConfig nodes
-2025/07/27 15:31:26 INFO ignore_irmetadata registered as the default namespace builder for ir.IRMetadata nodes
-[15:31:26.829] [plugins/cmdbuilder/cmdbuilder.go:163] INFO: Suppressing compiler logging
-Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/runtime took 30.217167ms, cumulative time 30.217084ms
-Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/leaf/workflow took 1.772708ms, cumulative time 31.989709ms
-Parsing module build/docker/nonleaf_ctr/nonleaf_proc/nonleaf_proc took 69.76975ms, cumulative time 101.759334ms
-Parsing module build/docker/nonleaf_ctr/nonleaf_proc/runtime took 87.093292ms, cumulative time 188.852543ms
-Parsing module build/docker/nonleaf_ctr/nonleaf_proc/workflow took 2.340541ms, cumulative time 191.192959ms
-Parsing module build/docker/leaf_ctr/leaf_proc/leaf_proc took 74.006167ms, cumulative time 265.199001ms
-Parsing module build/docker/leaf_ctr/leaf_proc/runtime took 33.044ms, cumulative time 298.24271ms
-Parsing module build/docker/leaf_ctr/leaf_proc/workflow took 1.146875ms, cumulative time 299.389502ms
+2025/07/27 16:05:07 INFO ignore_irconfig registered as the default namespace builder for ir.IRConfig nodes
+2025/07/27 16:05:07 INFO ignore_irmetadata registered as the default namespace builder for ir.IRMetadata nodes
+[16:05:07.130] [plugins/cmdbuilder/cmdbuilder.go:163] INFO: Suppressing compiler logging
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/runtime took 15.333458ms, cumulative time 15.333375ms
+Parsing module /Users/idhibhatpankam/Code/DS/MPI/blueprint/examples/leaf/workflow took 1.264542ms, cumulative time 16.597792ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/nonleaf_proc took 26.040041ms, cumulative time 42.637667ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/runtime took 14.748416ms, cumulative time 57.386042ms
+Parsing module build/docker/nonleaf_ctr/nonleaf_proc/workflow took 531.542µs, cumulative time 57.917584ms
+Parsing module build/docker/leaf_ctr/leaf_proc/leaf_proc took 81.042708ms, cumulative time 138.960209ms
+Parsing module build/docker/leaf_ctr/leaf_proc/runtime took 67.9155ms, cumulative time 206.875668ms
+Parsing module build/docker/leaf_ctr/leaf_proc/workflow took 39.537459ms, cumulative time 246.413043ms

@@ -39,13 +39,13 @@ run_build() {
 }
 
 # Run builds
-run_build dsb_hotel/wiring/main.go original
-run_build dsb_sn/wiring/main.go docker
-run_build leaf/wiring/main.go docker thrift http timeout_demo timeout_retries_demo xtrace_logger ot_logger govector
-run_build sockshop/wiring/main.go basic grpc docker rabbit
-run_build train_ticket/wiring/main.go docker
-
+# run_build dsb_hotel/wiring/main.go original
 # run_build dsb_sn/wiring/main.go docker
+# run_build leaf/wiring/main.go docker thrift http timeout_demo timeout_retries_demo xtrace_logger ot_logger govector
+# run_build sockshop/wiring/main.go basic grpc docker rabbit
+# run_build train_ticket/wiring/main.go docker
+
+run_build leaf/wiring/main.go xtrace_logger
 # run_build leaf/wiring/main.go thrift govector
 
 echo "📁 Logs saved under $LOG_ROOT/"
