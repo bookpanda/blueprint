@@ -5,6 +5,8 @@ import (
 	"os"
 	"reflect"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/blueprint"
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/blueprint/ioutil"
@@ -86,6 +88,7 @@ func (b *namespaceBuilder) buildCompatibleNodes(outputDir string, nodes []IRNode
 func buildArtifactGeneratorNodes(outputdir string, nodes []IRNode) ([]IRNode, error) {
 	remaining := make([]IRNode, 0, len(nodes))
 	for _, node := range nodes {
+		startTime := time.Now()
 		if gen, isGen := node.(ArtifactGenerator); isGen {
 			subdir, err := ioutil.CreateNodeDir(outputdir, node.Name())
 			if err != nil {
@@ -95,6 +98,7 @@ func buildArtifactGeneratorNodes(outputdir string, nodes []IRNode) ([]IRNode, er
 			if err := gen.GenerateArtifacts(subdir); err != nil {
 				return nil, err
 			}
+			fmt.Printf("Artifact generator %v, time: %v\n", node.Name(), time.Since(startTime))
 		} else {
 			remaining = append(remaining, node)
 		}
@@ -112,13 +116,39 @@ func (r *registry) buildAll(outputDir string, nodes []IRNode) (err error) {
 	}
 
 	// Try to group like-nodes into namespaces first
+	wg := sync.WaitGroup{}
 	for _, builder := range r.namespace {
+		// compatibleNodes := make([]IRNode, 0, len(nodes))
+		// remaining := make([]IRNode, 0, len(nodes))
+		// for _, node := range nodes {
+		// 	if builder.builds(node) {
+		// 		compatibleNodes = append(compatibleNodes, node)
+		// 	} else {
+		// 		remaining = append(remaining, node)
+		// 	}
+		// }
+
+		// // parellelize this
+		// b := builder
+		// wg.Add(1)
+		// go func() {
+		// 	startTime := time.Now()
+		// 	_, err := b.buildCompatibleNodes(outputDir, compatibleNodes)
+		// 	if err != nil {
+		// 		slog.Error(fmt.Sprintf("unable to build %v nodes due to %v", builder.name, err.Error()))
+		// 	}
+		// 	wg.Done()
+		// 	fmt.Printf("Builder %v nodes: %v, time: %v\n", b.name, len(compatibleNodes), time.Since(startTime))
+		// }()
+
+		// nodes = remaining
 		nodes, err = builder.buildCompatibleNodes(outputDir, nodes)
 		if err != nil {
 			return err
 		}
 	}
-
+	wg.Wait()
+	fmt.Printf("Artifact generator nodes: %v\n", len(nodes))
 	// Remaining nodes can be built individually
 	nodes, err = buildArtifactGeneratorNodes(outputDir, nodes)
 	if err != nil {

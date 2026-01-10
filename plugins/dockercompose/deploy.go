@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"reflect"
+	"time"
 
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/blueprint"
 	"github.com/blueprint-uservices/blueprint/blueprint/pkg/blueprint/ioutil"
@@ -61,18 +62,31 @@ The basic build process of a docker-compose deployment
 func (node *Deployment) generateArtifacts(workspace *dockerComposeWorkspace) error {
 
 	// Add any locally-built container images
-	for _, node := range ir.Filter[docker.ProvidesContainerImage](node.Nodes) {
+	imageNodes := ir.Filter[docker.ProvidesContainerImage](node.Nodes)
+	fmt.Printf("Image nodes: %v\n", len(imageNodes))
+	startTime := time.Now()
+	for i, node := range imageNodes {
+		// go func(node docker.ProvidesContainerImage) {
+		startTime2 := time.Now()
 		if err := node.AddContainerArtifacts(workspace); err != nil {
+			// slog.Error(fmt.Sprintf("unable to add container artifacts due to %v", err.Error()))
 			return err
 		}
+		fmt.Printf("Image node: #%v, time: %v\n", i, time.Since(startTime2))
+		// }(node)
 	}
+	fmt.Printf("Image nodes: %v, time: %v\n", len(imageNodes), time.Since(startTime))
 
 	// Collect all container instances
-	for _, node := range ir.Filter[docker.ProvidesContainerInstance](node.Nodes) {
+	instanceNodes := ir.Filter[docker.ProvidesContainerInstance](node.Nodes)
+	fmt.Printf("Instance nodes: %v\n", len(instanceNodes))
+	startTime = time.Now()
+	for _, node := range instanceNodes {
 		if err := node.AddContainerInstance(workspace); err != nil {
 			return err
 		}
 	}
+	fmt.Printf("Instance nodes: %v, time: %v\n", len(instanceNodes), time.Since(startTime))
 
 	// Build the docker-compose file
 	if err := workspace.Finish(); err != nil {
